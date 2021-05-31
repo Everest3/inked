@@ -13,7 +13,7 @@ class AuthController extends Controller
         $fields = $request->validate([
             'type' => 'required|string',
             'email' => 'required|string|unique:users,email',
-            'password' => 'required|string'
+            'password' => 'required|string|confirmed|min:6'
         ]);
 
         $name= substr($fields['email'], 0, strrpos($fields['email'], '@'));
