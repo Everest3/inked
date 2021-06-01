@@ -17,7 +17,7 @@ class CreateLibraTable extends Migration
             $table->id();
             $table->string('emer');
             $table->string('autori');
-            $table->string('vlersimi');
+            $table->string('vleresimi');
             $table->string('pershkrimi');
             $table->string('kopertina');
             $table->string('cmimi');
