@@ -13,12 +13,17 @@ class CreateLibraTable extends Migration
      */
     public function up()
     {
-        // Schema::post('libra', function (Blueprint $table) {
-        //     $table->id();
-        //     $table->string('emer');
-        //     $table->string('autori');
-        //     // $table->timestamps();
-        // });
+        Schema::post('libra', function (Blueprint $table) {
+            $table->id();
+            $table->string('emer');
+            $table->string('autori');
+            $table->string('vlersimi');
+            $table->string('pershkrimi');
+            $table->string('kopertina');
+            $table->string('cmimi');
+            $table->string('kategoria');
+            // $table->timestamps();
+        });
     }
 
     /**
