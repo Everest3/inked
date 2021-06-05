@@ -15,6 +15,10 @@ class AuthController extends Controller
             'email' => 'required|string|unique:users,email',
             'password' => 'required|string|confirmed|min:6'
         ]);
+        
+        // if ($fields->fails()) {
+        //     return response($fields,400);
+        // }
 
         $name= substr($fields['email'], 0, strrpos($fields['email'], '@'));
         $user = User::create([
