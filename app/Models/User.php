@@ -10,6 +10,8 @@ use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
+    // protected $table = "user";
+
     use HasFactory, Notifiable,HasApiTokens;
 
     /**
@@ -17,9 +19,10 @@ class User extends Authenticatable
      *
      * @var array
      */
+    public $timestamps = false;
     protected $fillable = [
-        'name',
-        'type',
+        'emri',
+        'tipi',
         'email',
         'password',
     ];

@@ -27,10 +27,10 @@ SET time_zone = "+00:00";
 -- Table structure for table `following`
 --
 
-CREATE TABLE `following` (
-  `USER_ID` int(11) NOT NULL,
-  `FOLLOWERS_ID` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+-- CREATE TABLE `following` (
+--   `USER_ID` int(11) NOT NULL,
+--   `FOLLOWERS_ID` int(11) NOT NULL
+-- ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -74,6 +74,40 @@ INSERT INTO `libra` (`EMER`, `AUTORI`, `VLERESIMI`, `PERSHKRIMI`, `KOPERTINA`, `
 INSERT INTO `libra` (`EMER`, `AUTORI`, `VLERESIMI`, `PERSHKRIMI`, `KOPERTINA`, `CMIMI`, `KATEGORIA`) VALUES ('Anna Karenina ', 'Leo Tolstoy', 8.00, "Anna Karenina tells of the doomed love affair between the sensuous and rebellious Anna and the dashing officer, Count Vronsky. Tragedy unfolds as Anna rejects her passionless marriage and must endure the hypocrisies of society. Set against a vast and richly textured canvas of nineteenth-century Russia, the novel's seven major characters create a dynamic imbalance, playing out the contrasts of city and country life and all the variations on love and family happiness. ", 'https://images4.penguinrandomhouse.com/cover/9780553902297', 7.00, 'fiction');
 INSERT INTO `libra` (`EMER`, `AUTORI`, `VLERESIMI`, `PERSHKRIMI`, `KOPERTINA`, `CMIMI`, `KATEGORIA`) VALUES  ("Alice's Adventures in Wonderland ", 'Lewis Carroll', '5.00', "In 1862 Charles Lutwidge Dodgson, a shy Oxford mathematician with a stammer, created a story about a little girl tumbling down a rabbit hole. Thus began the immortal adventures of Alice, perhaps the most popular heroine in English literature. Countless scholars have tried to define the charm of the Alice books–with those wonderfully eccentric characters the Queen of Hearts, Tweedledum, and Tweedledee, the Cheshire Cat, Mock Turtle, the Mad Hatter et al.–by proclaiming that they really comprise a satire on language, a political allegory, a parody of Victorian children’s literature, even a reflection of contemporary ecclesiastical history", 'https://blackwells.co.uk/jacket/l/9781447279990.jpg', 4.00, 'fiction');
 
+
+INSERT INTO `libra_te_preferuar` (`LIBRA_ID`,`USER_ID`) VALUES (1,2);
+INSERT INTO `libra_te_preferuar` (`LIBRA_ID`,`USER_ID`) VALUES (2,2);
+INSERT INTO `libra_te_preferuar` (`LIBRA_ID`,`USER_ID`) VALUES (3,2);
+INSERT INTO `libra_te_preferuar` (`LIBRA_ID`,`USER_ID`) VALUES (14,2);
+INSERT INTO `libra_te_preferuar` (`LIBRA_ID`,`USER_ID`) VALUES (15,2);
+INSERT INTO `libra_te_preferuar` (`LIBRA_ID`,`USER_ID`) VALUES (16,2);
+
+INSERT INTO `libra_te_lexuar` (`LIBRA_ID`,`USER_ID`) VALUES (16,2);
+INSERT INTO `libra_te_lexuar` (`LIBRA_ID`,`USER_ID`) VALUES (14,2);
+INSERT INTO `libra_te_lexuar` (`LIBRA_ID`,`USER_ID`) VALUES (13,2);
+INSERT INTO `libra_te_lexuar` (`LIBRA_ID`,`USER_ID`) VALUES (12,2);
+INSERT INTO `libra_te_lexuar` (`LIBRA_ID`,`USER_ID`) VALUES (11,2);
+INSERT INTO `libra_te_lexuar` (`LIBRA_ID`,`USER_ID`) VALUES (2,2);
+
+INSERT INTO `libra_te_blere` (`LIBRA_ID`,`USER_ID`) VALUES (14,2);
+INSERT INTO `libra_te_blere` (`LIBRA_ID`,`USER_ID`) VALUES (2,2);
+INSERT INTO `libra_te_blere` (`LIBRA_ID`,`USER_ID`) VALUES (3,2);
+INSERT INTO `libra_te_blere` (`LIBRA_ID`,`USER_ID`) VALUES (16,2);
+INSERT INTO `libra_te_blere` (`LIBRA_ID`,`USER_ID`) VALUES (12,2);
+INSERT INTO `libra_te_blere` (`LIBRA_ID`,`USER_ID`) VALUES (13,2);
+INSERT INTO `libra_te_blere` (`LIBRA_ID`,`USER_ID`) VALUES (18,2);
+INSERT INTO `libra_te_blere` (`LIBRA_ID`,`USER_ID`) VALUES (9,2);
+
+
+INSERT INTO `libra_te_arkivuar` (`LIBRA_ID`,`USER_ID`) VALUES (16,2);
+INSERT INTO `libra_te_arkivuar` (`LIBRA_ID`,`USER_ID`) VALUES (14,2);
+INSERT INTO `libra_te_arkivuar` (`LIBRA_ID`,`USER_ID`) VALUES (9,2);
+INSERT INTO `libra_te_arkivuar` (`LIBRA_ID`,`USER_ID`) VALUES (11,2);
+INSERT INTO `libra_te_arkivuar` (`LIBRA_ID`,`USER_ID`) VALUES (12,2);
+INSERT INTO `libra_te_arkivuar` (`LIBRA_ID`,`USER_ID`) VALUES (15,2);
+INSERT INTO `libra_te_arkivuar` (`LIBRA_ID`,`USER_ID`) VALUES (7,2);
+INSERT INTO `libra_te_arkivuar` (`LIBRA_ID`,`USER_ID`) VALUES (8,2);
+
 -- --------------------------------------------------------
 
 --
@@ -96,6 +130,17 @@ CREATE TABLE `libra_te_preferuar` (
   `USER_ID` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+CREATE TABLE `libra_te_arkivuar` (
+  `LIBRA_ID` int(11) NOT NULL,
+  `USER_ID` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+
+CREATE TABLE `libra_te_lexuar` (
+  `ID` int(11),
+  `LIBRA_ID` int(11) NOT NULL,
+  `USER_ID` int(11) NOT NULL
+);
 -- --------------------------------------------------------
 
 --
@@ -103,55 +148,35 @@ CREATE TABLE `libra_te_preferuar` (
 --
 
 CREATE TABLE `user` (
-  `ID` int(11) NOT NULL,
+  `ID` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
   `EMRI` varchar(30) DEFAULT NULL,
   `EMAIL` varchar(30) NOT NULL,
   `PASSWORD` binary(64) NOT NULL,
   `TIPI` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `user`
---
 
---
--- Indexes for dumped tables
---
 
---
--- Indexes for table `following`
---
-ALTER TABLE `following`
-  ADD KEY `FOLLOWERS_ID` (`FOLLOWERS_ID`),
-  ADD KEY `USER_ID` (`USER_ID`);
 
---
--- Indexes for table `libra`
---
-ALTER TABLE `LIBRA`
-  CHANGE COLUMN `id` `id` INT(11) NOT NULL AUTO_INCREMENT,
-  ADD PRIMARY KEY (`id`);
+ALTER TABLE `libra_te_preferuar` ADD FOREIGN KEY (`LIBRA_ID`) REFERENCES LIBRA (`ID`) ON DELETE CASCADE;
+ALTER TABLE `libra_te_preferuar` ADD FOREIGN KEY (`USER_ID`) REFERENCES USERS (`ID`);
 
---
--- Indexes for table `libra_te_blere`
---
-ALTER TABLE `libra_te_blere`
-  ADD FOREIGN KEY (LIBRA_ID) REFERENCES LIBRA_ID (ID) ON DELETE CASCADE,
-  ADD FOREIGN KEY (USER_ID) REFERENCES LIBRA_ID (USER_ID) ON DELETE CASCADE;
+ALTER TABLE `libra_te_lexuar` ADD FOREIGN KEY (`LIBRA_ID`) REFERENCES LIBRA (`ID`) ON DELETE CASCADE;
+ALTER TABLE `libra_te_lexuar` ADD FOREIGN KEY (`USER_ID`) REFERENCES USERS (`ID`) ON DELETE CASCADE;
 
---
--- Indexes for table `libra_te_preferuar`
---
-ALTER TABLE `libra_te_preferuar`
-  ADD KEY `LIBRA_ID` (`LIBRA_ID`),
-  ADD KEY `USER_ID` (`USER_ID`);
+ALTER TABLE `libra_te_blere` ADD FOREIGN KEY (`LIBRA_ID`) REFERENCES LIBRA (`ID`) ON DELETE CASCADE;
+ALTER TABLE `libra_te_blere` ADD FOREIGN KEY (`USER_ID`) REFERENCES USERS (`ID`) ON DELETE CASCADE;
 
---
--- Indexes for table `user`
---
-ALTER TABLE `user`
-  ADD UNIQUE KEY `ID` (`ID`);
+ALTER TABLE `libra_te_arkivuar` ADD FOREIGN KEY (`LIBRA_ID`) REFERENCES LIBRA (`ID`) ON DELETE CASCADE;
+ALTER TABLE `libra_te_arkivuar` ADD FOREIGN KEY (`USER_ID`) REFERENCES USERS (`ID`) ON DELETE CASCADE;
 
+
+ALTER TABLE `LIBRA` CHANGE COLUMN `id` `id` INT(11) NOT NULL AUTO_INCREMENT ADD PRIMARY KEY (`id`);
+ ALTER TABLE `users` ADD ID int NOT NULL AUTO_INCREMENT ADD primary key;
+ ALTER TABLE `libra_te_lexuar` ADD ID int NOT NULL AUTO_INCREMENT ADD primary key;
+ ALTER TABLE `libra_te_preferuar` ADD ID int NOT NULL AUTO_INCREMENT ADD primary key;
+ ALTER TABLE `libra_te_blere` ADD ID int NOT NULL AUTO_INCREMENT ADD primary key;
+ ALTER TABLE `libra_te_arkivuar` ADD ID int NOT NULL AUTO_INCREMENT ADD primary key;
 --
 -- AUTO_INCREMENT for dumped tables
 --
@@ -159,14 +184,14 @@ ALTER TABLE `user`
 --
 -- AUTO_INCREMENT for table `libra`
 --
-ALTER TABLE `libra`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
+-- ALTER TABLE `libra`
+--   MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
 
 --
 -- AUTO_INCREMENT for table `user`
 --
-ALTER TABLE `user`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+-- ALTER TABLE `user`
+--   MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- Constraints for dumped tables
@@ -175,25 +200,41 @@ ALTER TABLE `user`
 --
 -- Constraints for table `following`
 --
-ALTER TABLE `following`
-  ADD CONSTRAINT `following_ibfk_1` FOREIGN KEY (`FOLLOWERS_ID`) REFERENCES `user` (`ID`),
-  ADD CONSTRAINT `following_ibfk_2` FOREIGN KEY (`USER_ID`) REFERENCES `user` (`ID`);
+-- ALTER TABLE `following`
+--   ADD CONSTRAINT `following_ibfk_1` FOREIGN KEY (`FOLLOWERS_ID`) REFERENCES `user` (`ID`),
+--   ADD CONSTRAINT `following_ibfk_2` FOREIGN KEY (`USER_ID`) REFERENCES `user` (`ID`);
 
 --
 -- Constraints for table `libra_te_blere`
 --
-ALTER TABLE `libra_te_blere`
-  ADD CONSTRAINT `libra_te_blere_ibfk_1` FOREIGN KEY (`LIBRA_ID`) REFERENCES `libra` (`ID`),
-  ADD CONSTRAINT `libra_te_blere_ibfk_2` FOREIGN KEY (`USER_ID`) REFERENCES `user` (`ID`);
+-- ALTER TABLE `libra_te_blere`
+--   ADD CONSTRAINT `libra_te_blere_ibfk_1` FOREIGN KEY (`LIBRA_ID`) REFERENCES `libra` (`ID`),
+--   ADD CONSTRAINT `libra_te_blere_ibfk_2` FOREIGN KEY (`USER_ID`) REFERENCES `user` (`ID`);
 
 --
 -- Constraints for table `libra_te_preferuar`
 --
-ALTER TABLE `libra_te_preferuar`
-  ADD CONSTRAINT `libra_te_preferuar_ibfk_1` FOREIGN KEY (`LIBRA_ID`) REFERENCES `libra` (`ID`),
-  ADD CONSTRAINT `libra_te_preferuar_ibfk_2` FOREIGN KEY (`USER_ID`) REFERENCES `user` (`ID`);
-COMMIT;
+-- ALTER TABLE `libra_te_preferuar`
+--   ADD CONSTRAINT `libra_te_preferuar_ibfk_1` FOREIGN KEY (`LIBRA_ID`) REFERENCES `libra` (`ID`),
+--   ADD CONSTRAINT `libra_te_preferuar_ibfk_2` FOREIGN KEY (`USER_ID`) REFERENCES `user` (`ID`);
+-- COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
+-- QUERIES
+-- GET LIBRA TE PREFERUAR
+SELECT L.EMER,L.AUTORI,L.VLERESIMI,L.PERSHKRIMI,L.KOPERTINA,L.CMIMI,L.KATEGORIA FROM `libra_te_preferuar` LP JOIN USERS U ON U.ID=LP.USER_ID
+JOIN LIBRA L ON L.ID=LP.LIBRA_ID
+
+-- Get trending books
+SELECT * FROM LIBRA L WHERE L.VLERESIMI>8 LIMIT 3
+
+--get bought books 
+SELECT L.ID,L.EMER,L.VLERESIMI,L.KOPERTINA FROM `libra_te_blere` LL JOIN USERS U ON U.ID=LL.USER_ID
+JOIN LIBRA L ON L.ID=LL.LIBRA_ID WHERE U.ID=$user_id $limitQuery
+
+--get archived books
+SELECT L.ID,L.EMER,L.VLERESIMI,L.KOPERTINA FROM `libra_te_arkivuar` LL JOIN USERS U ON U.ID=LL.USER_ID
+JOIN LIBRA L ON L.ID=LL.LIBRA_ID WHERE U.ID=$user_id $limitQuery
