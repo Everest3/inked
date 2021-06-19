@@ -1,0 +1,8 @@
+per thap serverin : 
+php artisan serve
+
+Per thedh te dhena ndb 
+shko te http://localhost/phpmyadmin/ ngoogle 
+kliko te emri i databases edhe beji drop gjitha tabelave 
+pst te ky projekti ktu te terminali vej kte komanden
+php artisan migrate

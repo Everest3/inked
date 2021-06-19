@@ -9,17 +9,22 @@ use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
+    
+    public function MyMethod(Request $request) {
+        return $request->user();
+    }
+    
     public function register(Request $request) {
         $fields = $request->validate([
-            'type' => 'required|string',
+            'tipi' => 'required|string',
             'email' => 'required|string|unique:users,email',
             'password' => 'required|string|confirmed|min:6'
         ]);
 
-        $name= substr($fields['email'], 0, strrpos($fields['email'], '@'));
+        $emri= substr($fields['email'], 0, strrpos($fields['email'], '@'));
         $user = User::create([
-            'name' => $name,
-            'type'=>$fields['type'],
+            'emri' => $emri,
+            'tipi'=>$fields['tipi'],
             'email' => $fields['email'],
             'password' => bcrypt($fields['password'])
         ]);
