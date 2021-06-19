@@ -108,22 +108,11 @@ INSERT INTO `libra_te_arkivuar` (`LIBRA_ID`,`USER_ID`) VALUES (15,2);
 INSERT INTO `libra_te_arkivuar` (`LIBRA_ID`,`USER_ID`) VALUES (7,2);
 INSERT INTO `libra_te_arkivuar` (`LIBRA_ID`,`USER_ID`) VALUES (8,2);
 
--- --------------------------------------------------------
-
---
--- Table structure for table `libra_te_blere`
---
-
 CREATE TABLE `libra_te_blere` (
   `LIBRA_ID` int(11) NOT NULL,
   `USER_ID` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- --------------------------------------------------------
-
---
--- Table structure for table `libra_te_preferuar`
---
 
 CREATE TABLE `libra_te_preferuar` (
   `LIBRA_ID` int(11) NOT NULL,
@@ -141,21 +130,6 @@ CREATE TABLE `libra_te_lexuar` (
   `LIBRA_ID` int(11) NOT NULL,
   `USER_ID` int(11) NOT NULL
 );
--- --------------------------------------------------------
-
---
--- Table structure for table `user`
---
-
-CREATE TABLE `user` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  `EMRI` varchar(30) DEFAULT NULL,
-  `EMAIL` varchar(30) NOT NULL,
-  `PASSWORD` binary(64) NOT NULL,
-  `TIPI` varchar(30) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
-
 
 
 ALTER TABLE `libra_te_preferuar` ADD FOREIGN KEY (`LIBRA_ID`) REFERENCES LIBRA (`ID`) ON DELETE CASCADE;
@@ -177,64 +151,17 @@ ALTER TABLE `LIBRA` CHANGE COLUMN `id` `id` INT(11) NOT NULL AUTO_INCREMENT ADD 
  ALTER TABLE `libra_te_preferuar` ADD ID int NOT NULL AUTO_INCREMENT ADD primary key;
  ALTER TABLE `libra_te_blere` ADD ID int NOT NULL AUTO_INCREMENT ADD primary key;
  ALTER TABLE `libra_te_arkivuar` ADD ID int NOT NULL AUTO_INCREMENT ADD primary key;
---
--- AUTO_INCREMENT for dumped tables
---
 
---
--- AUTO_INCREMENT for table `libra`
---
--- ALTER TABLE `libra`
---   MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
+-- SELECT L.EMER,L.AUTORI,L.VLERESIMI,L.PERSHKRIMI,L.KOPERTINA,L.CMIMI,L.KATEGORIA FROM `libra_te_preferuar` LP JOIN USERS U ON U.ID=LP.USER_ID
+-- JOIN LIBRA L ON L.ID=LP.LIBRA_ID
 
---
--- AUTO_INCREMENT for table `user`
---
--- ALTER TABLE `user`
---   MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+-- -- Get trending books
+-- SELECT * FROM LIBRA L WHERE L.VLERESIMI>8 LIMIT 3
 
---
--- Constraints for dumped tables
---
+-- --get bought books 
+-- SELECT L.ID,L.EMER,L.VLERESIMI,L.KOPERTINA FROM `libra_te_blere` LL JOIN USERS U ON U.ID=LL.USER_ID
+-- JOIN LIBRA L ON L.ID=LL.LIBRA_ID WHERE U.ID=$user_id $limitQuery
 
---
--- Constraints for table `following`
---
--- ALTER TABLE `following`
---   ADD CONSTRAINT `following_ibfk_1` FOREIGN KEY (`FOLLOWERS_ID`) REFERENCES `user` (`ID`),
---   ADD CONSTRAINT `following_ibfk_2` FOREIGN KEY (`USER_ID`) REFERENCES `user` (`ID`);
-
---
--- Constraints for table `libra_te_blere`
---
--- ALTER TABLE `libra_te_blere`
---   ADD CONSTRAINT `libra_te_blere_ibfk_1` FOREIGN KEY (`LIBRA_ID`) REFERENCES `libra` (`ID`),
---   ADD CONSTRAINT `libra_te_blere_ibfk_2` FOREIGN KEY (`USER_ID`) REFERENCES `user` (`ID`);
-
---
--- Constraints for table `libra_te_preferuar`
---
--- ALTER TABLE `libra_te_preferuar`
---   ADD CONSTRAINT `libra_te_preferuar_ibfk_1` FOREIGN KEY (`LIBRA_ID`) REFERENCES `libra` (`ID`),
---   ADD CONSTRAINT `libra_te_preferuar_ibfk_2` FOREIGN KEY (`USER_ID`) REFERENCES `user` (`ID`);
--- COMMIT;
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
-
--- QUERIES
--- GET LIBRA TE PREFERUAR
-SELECT L.EMER,L.AUTORI,L.VLERESIMI,L.PERSHKRIMI,L.KOPERTINA,L.CMIMI,L.KATEGORIA FROM `libra_te_preferuar` LP JOIN USERS U ON U.ID=LP.USER_ID
-JOIN LIBRA L ON L.ID=LP.LIBRA_ID
-
--- Get trending books
-SELECT * FROM LIBRA L WHERE L.VLERESIMI>8 LIMIT 3
-
---get bought books 
-SELECT L.ID,L.EMER,L.VLERESIMI,L.KOPERTINA FROM `libra_te_blere` LL JOIN USERS U ON U.ID=LL.USER_ID
-JOIN LIBRA L ON L.ID=LL.LIBRA_ID WHERE U.ID=$user_id $limitQuery
-
---get archived books
-SELECT L.ID,L.EMER,L.VLERESIMI,L.KOPERTINA FROM `libra_te_arkivuar` LL JOIN USERS U ON U.ID=LL.USER_ID
-JOIN LIBRA L ON L.ID=LL.LIBRA_ID WHERE U.ID=$user_id $limitQuery
+-- --get archived books
+-- SELECT L.ID,L.EMER,L.VLERESIMI,L.KOPERTINA FROM `libra_te_arkivuar` LL JOIN USERS U ON U.ID=LL.USER_ID
+-- JOIN LIBRA L ON L.ID=LL.LIBRA_ID WHERE U.ID=$user_id $limitQuery
